@@ -1,6 +1,158 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<style id="critical-above-fold">
+/* CSS Ultra-Crítico - Solo Above the Fold */
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;line-height:1.6;color:#333}
+.elementor-section{display:block;position:relative}
+.elementor-container{max-width:1200px;margin:0 auto;padding:0 15px}
+.elementor-row{display:flex;flex-wrap:wrap}
+.elementor-column{flex:1;min-height:1px}
+.elementor-widget{margin-bottom:20px}
+.elementor-heading-title{margin:0 0 15px;font-weight:600;line-height:1.2}
+.elementor-image img{max-width:100%;height:auto;display:block}
+.elementor-button{display:inline-block;padding:12px 24px;background:#61ce70;color:#fff;text-decoration:none;border-radius:3px;transition:background .3s}
+.elementor-button:hover{background:#4cae4c}
+.elementor-widget-image-carousel{position:relative;overflow:hidden}
+.swiper-container{position:relative;overflow:hidden}
+.swiper-wrapper{display:flex;transition-property:transform}
+.swiper-slide{flex-shrink:0;width:100%;position:relative}
+.swiper-slide img{width:100%;height:auto;object-fit:cover}
+.swiper-button-next,.swiper-button-prev{position:absolute;top:50%;z-index:10;width:27px;height:44px;margin-top:-22px;background:rgba(255,255,255,.8);border:none;cursor:pointer;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#007cba}
+.swiper-button-prev{left:10px}
+.swiper-button-next{right:10px}
+@media (max-width:767px){
+.elementor-column{flex:100%;margin-bottom:20px}
+.elementor-container{padding:0 10px}
+.swiper-button-next,.swiper-button-prev{display:none}
+}
+</style>
+<!-- Resource Hints Optimizados -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+<script src="wp-includes/js/jquery/jquery.minf43b.js?ver=3.7.1"></script>
+<script>
+// Inicialización optimizada de dependencias
+(function() {
+    'use strict';
+    
+    // Verificar que jQuery esté disponible
+    function waitForjQuery(callback) {
+        if (typeof jQuery !== 'undefined') {
+            callback();
+        } else {
+            setTimeout(function() {
+                waitForjQuery(callback);
+            }, 50);
+        }
+    }
+    
+    // Inicialización cuando jQuery esté listo
+    waitForjQuery(function() {
+        // Configurar jQuery para mejor rendimiento
+        jQuery.ajaxSetup({
+            cache: true
+        });
+        
+        // Optimizar eventos de scroll
+        var scrollTimer = null;
+        jQuery(window).on('scroll', function() {
+            if (scrollTimer) {
+                clearTimeout(scrollTimer);
+            }
+            scrollTimer = setTimeout(function() {
+                // Eventos de scroll optimizados
+                jQuery(window).trigger('scroll.optimized');
+            }, 16); // ~60fps
+        });
+        
+        // Lazy loading mejorado para elementos dinámicos
+        function initDynamicLazyLoading() {
+            if ('IntersectionObserver' in window) {
+                var lazyElements = document.querySelectorAll('[data-lazy]');
+                var lazyObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            var element = entry.target;
+                            if (element.dataset.lazy === 'image') {
+                                var img = element.querySelector('img');
+                                if (img && img.dataset.src) {
+                                    img.src = img.dataset.src;
+                                    img.classList.add('loaded');
+                                }
+                            }
+                            lazyObserver.unobserve(element);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px 0px'
+                });
+                
+                lazyElements.forEach(function(element) {
+                    lazyObserver.observe(element);
+                });
+            }
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        jQuery(document).ready(function($) {
+            initDynamicLazyLoading();
+            
+            // Optimizar formularios
+            $('form').each(function() {
+                var $form = $(this);
+                $form.on('submit', function() {
+                    $form.find('input[type="submit"], button[type="submit"]').prop('disabled', true);
+                });
+            });
+            
+            // Optimizar imágenes del slider
+            $('.swiper-slide img').each(function(index) {
+                var $img = $(this);
+                if (index < 2) {
+                    $img.attr('loading', 'eager');
+                    $img.attr('fetchpriority', 'high');
+                } else {
+                    $img.attr('loading', 'lazy');
+                }
+            });
+        });
+    });
+    
+    // Optimización de Web Vitals
+    function optimizeWebVitals() {
+        // Reducir CLS (Cumulative Layout Shift)
+        var images = document.querySelectorAll('img:not([width]):not([height])');
+        images.forEach(function(img) {
+            if (!img.style.aspectRatio) {
+                img.style.aspectRatio = '16/9';
+            }
+        });
+        
+        // Optimizar LCP (Largest Contentful Paint)
+        var heroElements = document.querySelectorAll('.elementor-section:first-child img, .swiper-slide:first-child img');
+        heroElements.forEach(function(element) {
+            element.setAttribute('fetchpriority', 'high');
+            element.setAttribute('loading', 'eager');
+        });
+    }
+    
+    // Ejecutar optimizaciones
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', optimizeWebVitals);
+    } else {
+        optimizeWebVitals();
+    }
+})();
+</script>
+
 	<!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -119,10 +271,10 @@
 <link rel='stylesheet' id='elementor-icons-shared-0-css' href='wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min52d5.css?ver=5.15.3' type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-icons-fa-solid-css' href='wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min52d5.css?ver=5.15.3' type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-icons-fa-brands-css' href='wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min52d5.css?ver=5.15.3' type='text/css' media='all' />
-<script type="text/javascript" src="wp-includes/js/jquery/jquery.minf43b.js?ver=3.7.1" id="jquery-core-js"></script>
-<script type="text/javascript" src="wp-includes/js/jquery/jquery-migrate.min5589.js?ver=3.4.1" id="jquery-migrate-js"></script>
-<script type="text/javascript" src="wp-content/themes/woodmart/js/libs/device.min72ad.js?ver=7.3.4" id="wd-device-library-js"></script>
-<script type="text/javascript" src="wp-content/themes/woodmart/js/scripts/global/scrollBar.min72ad.js?ver=7.3.4" id="wd-scrollbar-js"></script>
+
+<script src="wp-includes/js/jquery/jquery-migrate.min5589.js?ver=3.4.1" defer></script>
+<script defer type="text/javascript" src="wp-content/themes/woodmart/js/libs/device.min72ad.js?ver=7.3.4" id="wd-device-library-js"></script>
+<script defer type="text/javascript" src="wp-content/themes/woodmart/js/scripts/global/scrollBar.min72ad.js?ver=7.3.4" id="wd-scrollbar-js"></script>
 <link rel="alternate" title="JSON" type="application/json" href="wp-json/wp/v2/pages/13038.json" />
 <meta name="generator" content="WordPress 6.8.2" />
 <link rel='shortlink' href='index.html' />
@@ -408,7 +560,22 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 			</style>
 			<script src="wp-content/themes/woodmart/js/protection.js"></script>
-			</head>
+			
+<!-- DNS Prefetch para recursos externos -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+
+<!-- Preload recursos críticos -->
+<link rel="preload" href="wp-content/themes/woodmart/css/parts/base.min72ad.css" as="style">
+<link rel="preload" href="wp-includes/js/jquery/jquery.minf43b.js" as="script">
+<link rel="preload" href="wp-content/plugins/elementor/assets/css/frontend-lite.min34a7.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="wp-content/plugins/elementor/assets/css/frontend-lite.min34a7.css"></noscript>
+
+<!-- Optimización de rendimiento -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
 
 <body class="home wp-singular page-template-default page page-id-13038 wp-theme-woodmart wp-child-theme-woodmart-child wrapper-full-width  categories-accordion-on woodmart-ajax-shop-on offcanvas-sidebar-mobile offcanvas-sidebar-tablet elementor-default elementor-kit-5 elementor-page elementor-page-13038">
 	<!-- Google Tag Manager (noscript) -->
@@ -467,7 +634,56 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 <div class="whb-column whb-col-center whb-visible-lg whb-empty-column">
 	</div>
 <div class="whb-column whb-col-right whb-visible-lg">
-	<div class="wd-header-html">			<link rel="stylesheet" id="elementor-post-13075-css" href="wp-content/uploads/elementor/css/post-130755a67.css?ver=1748465815" type="text/css" media="all">
+	<div class="wd-header-html">			
+
+<style>
+/* CSS Crítico Avanzado - Above the Fold */
+*{box-sizing:border-box}
+body,html{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+.elementor-section{position:relative;overflow:hidden}
+.elementor-container{max-width:1200px;margin:0 auto;padding:0 15px;position:relative}
+.elementor-row{display:flex;flex-wrap:wrap;align-items:stretch}
+.elementor-column{position:relative;min-height:1px;display:flex;flex-direction:column}
+.elementor-column-gap-default>.elementor-column>.elementor-element-populated{padding:10px}
+.elementor-widget{position:relative}
+.elementor-widget:not(:last-child){margin-bottom:20px}
+.elementor-heading-title{margin:0 0 15px;color:#333;font-weight:600;line-height:1.2}
+.elementor-image{text-align:center}
+.elementor-image img{border:none;border-radius:0;max-width:100%;height:auto;display:inline-block;vertical-align:middle}
+.elementor-button-wrapper{text-align:left}
+.elementor-button{font-family:inherit;font-size:inherit;line-height:1;fill:#fff;color:#fff;text-align:center;transition:all .3s;border:none;outline:none;cursor:pointer;text-decoration:none;display:inline-block;padding:12px 24px;background-color:#61ce70;border-radius:3px}
+.elementor-button:hover{background-color:#4cae4c;transform:translateY(-1px)}
+.elementor-widget-image-carousel{position:relative}
+.swiper-container{margin:0 auto;position:relative;overflow:hidden;list-style:none;padding:0;z-index:1}
+.swiper-wrapper{position:relative;width:100%;height:100%;z-index:1;display:flex;transition-property:transform;box-sizing:content-box}
+.swiper-slide{flex-shrink:0;width:100%;height:100%;position:relative;transition-property:transform}
+.swiper-slide img{width:100%;height:auto;object-fit:cover}
+.swiper-button-next,.swiper-button-prev{position:absolute;top:50%;width:27px;height:44px;margin-top:-22px;z-index:10;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#007cba;background:rgba(255,255,255,.8);border-radius:3px;transition:all .3s}
+.swiper-button-prev{left:10px}
+.swiper-button-next{right:10px}
+.swiper-button-next:hover,.swiper-button-prev:hover{background:rgba(255,255,255,.95);transform:scale(1.1)}
+@media (max-width:1024px){
+.elementor-column{flex:50%;max-width:50%}
+}
+@media (max-width:767px){
+.elementor-column{flex:100%;max-width:100%;margin-bottom:20px}
+.elementor-container{padding:0 10px}
+.elementor-button{padding:10px 20px;font-size:14px}
+.swiper-button-next,.swiper-button-prev{width:24px;height:40px;margin-top:-20px}
+}
+@media (max-width:480px){
+.elementor-container{padding:0 5px}
+.elementor-heading-title{font-size:1.5em}
+.swiper-button-next,.swiper-button-prev{display:none}
+}
+/* Optimización de carga de imágenes */
+img{loading:lazy}
+.elementor-image img{transition:opacity .3s ease;opacity:0}
+.elementor-image img.loaded{opacity:1}
+/* Skeleton loading para mejor UX */
+.skeleton{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:loading 1.5s infinite}
+@keyframes loading{0%{background-position:200% 0}100%{background-position:-200% 0}}
+</style><link rel="stylesheet" id="elementor-post-13075-css" href="wp-content/uploads/elementor/css/post-130755a67.css?ver=1748465815" type="text/css" media="all">
 					<div data-elementor-type="wp-post" data-elementor-id="13075" class="elementor elementor-13075" data-elementor-post-type="cms_block">
 						<section data-particle_enable="false" data-particle-mobile-disabled="false" class="wd-negative-gap elementor-section elementor-top-section elementor-element elementor-element-069e233 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default wd-section-disabled" data-id="069e233" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
 						<div class="elementor-container elementor-column-gap-default">
@@ -1072,7 +1288,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 				</div>
 				<div class="elementor-element elementor-element-05e7b7e elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="05e7b7e" data-element_type="widget" data-widget_type="icon-list.default">
 				<div class="elementor-widget-container">
-			<link rel="stylesheet" href="wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">		<ul class="elementor-icon-list-items">
+			<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="wp-content/plugins/elementor/assets/css/widget-icon-list.min.css"><noscript><link rel="stylesheet" href="wp-content/plugins/elementor/assets/css/widget-icon-list.min.css"></noscript>		<ul class="elementor-icon-list-items">
 							<li class="elementor-icon-list-item">
 											<a href="index.html#maestro">
 
@@ -1514,7 +1730,231 @@ document.addEventListener('DOMContentLoaded', function() {
     document.head.appendChild(style);
 });
 </script>
-</body>
+
+<script>
+// Carga inteligente de imágenes y optimización de rendimiento
+(function() {
+    'use strict';
+    
+    // Lazy loading mejorado para imágenes
+    function initLazyLoading() {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px'
+            });
+            
+            images.forEach(img => imageObserver.observe(img));
+        } else {
+            // Fallback para navegadores sin IntersectionObserver
+            images.forEach(img => img.classList.add('loaded'));
+        }
+    }
+    
+    // Optimización de Web Vitals
+    function optimizeWebVitals() {
+        // Preconectar a dominios externos
+        const preconnectDomains = ['fonts.googleapis.com', 'fonts.gstatic.com'];
+        preconnectDomains.forEach(domain => {
+            const link = document.createElement('link');
+            link.rel = 'preconnect';
+            link.href = `https://${domain}`;
+            link.crossOrigin = 'anonymous';
+            document.head.appendChild(link);
+        });
+        
+        // Optimizar CLS (Cumulative Layout Shift)
+        const images = document.querySelectorAll('img:not([width]):not([height])');
+        images.forEach(img => {
+            img.style.aspectRatio = '16/9'; // Ratio por defecto
+        });
+    }
+    
+    // Carga diferida de recursos no críticos
+    function loadNonCriticalResources() {
+        // Cargar CSS diferido después del LCP
+        const deferredStyles = document.querySelectorAll('link[rel="preload"][as="style"]');
+        deferredStyles.forEach(link => {
+            if (link.onload === null) {
+                link.onload = function() {
+                    this.onload = null;
+                    this.rel = 'stylesheet';
+                };
+            }
+        });
+    }
+    
+    // Inicialización optimizada
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            initLazyLoading();
+            optimizeWebVitals();
+            
+            // Cargar recursos no críticos después de un delay
+            setTimeout(loadNonCriticalResources, 100);
+        });
+    } else {
+        initLazyLoading();
+        optimizeWebVitals();
+        loadNonCriticalResources();
+    }
+    
+    // Optimización del slider personalizado
+    window.addEventListener('load', function() {
+        if (typeof initCustomSlider === 'function') {
+            initCustomSlider();
+        }
+    });
+})();
+</script>
+<script>
+// Carga progresiva optimizada para reducir bloqueo de renderizado
+(function() {
+    'use strict';
+    
+    // Función para cargar CSS de forma asíncrona
+    function loadCSS(href, before, media) {
+        var doc = window.document;
+        var ss = doc.createElement("link");
+        var ref;
+        if (before) {
+            ref = before;
+        } else {
+            var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+            ref = refs[refs.length - 1];
+        }
+        var sheets = doc.styleSheets;
+        ss.rel = "stylesheet";
+        ss.href = href;
+        ss.media = "only x";
+        
+        function ready(cb) {
+            if (doc.body) {
+                return cb();
+            }
+            setTimeout(function() {
+                ready(cb);
+            });
+        }
+        
+        ready(function() {
+            ref.parentNode.insertBefore(ss, (before ? ref : ref.nextSibling));
+        });
+        
+        var onloadcssdefined = function(cb) {
+            var resolvedHref = ss.href;
+            var i = sheets.length;
+            while (i--) {
+                if (sheets[i].href === resolvedHref) {
+                    return cb();
+                }
+            }
+            setTimeout(function() {
+                onloadcssdefined(cb);
+            });
+        };
+        
+        function loadCB() {
+            if (ss.addEventListener) {
+                ss.removeEventListener("load", loadCB);
+            }
+            ss.media = media || "all";
+        }
+        
+        if (ss.addEventListener) {
+            ss.addEventListener("load", loadCB);
+        }
+        ss.onloadcssdefined = onloadcssdefined;
+        onloadcssdefined(loadCB);
+        return ss;
+    }
+    
+    // Cargar recursos no críticos después del LCP
+    function loadNonCriticalResources() {
+        // Priorizar carga basada en viewport
+        var isDesktop = window.innerWidth > 1024;
+        var isMobile = window.innerWidth <= 767;
+        
+        // Cargar recursos específicos según dispositivo
+        if (isMobile) {
+            // En móvil, cargar solo lo esencial
+            setTimeout(function() {
+                var mobileCSS = document.querySelectorAll('link[rel="preload"][as="style"]');
+                mobileCSS.forEach(function(link, index) {
+                    setTimeout(function() {
+                        if (link.onload === null) {
+                            link.onload = function() {
+                                this.onload = null;
+                                this.rel = 'stylesheet';
+                            };
+                        }
+                    }, index * 50); // Escalonar la carga
+                });
+            }, 200);
+        } else {
+            // En desktop, cargar todo más rápido
+            setTimeout(function() {
+                var desktopCSS = document.querySelectorAll('link[rel="preload"][as="style"]');
+                desktopCSS.forEach(function(link) {
+                    if (link.onload === null) {
+                        link.onload = function() {
+                            this.onload = null;
+                            this.rel = 'stylesheet';
+                        };
+                    }
+                });
+            }, 100);
+        }
+    }
+    
+    // Optimización de imágenes para LCP
+    function optimizeLCPImages() {
+        var heroImages = document.querySelectorAll('.elementor-widget-image img, .swiper-slide img');
+        heroImages.forEach(function(img, index) {
+            if (index < 2) { // Solo las primeras 2 imágenes
+                img.loading = 'eager';
+                img.fetchPriority = 'high';
+            }
+        });
+    }
+    
+    // Inicialización optimizada
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            optimizeLCPImages();
+            setTimeout(loadNonCriticalResources, 50);
+        });
+    } else {
+        optimizeLCPImages();
+        loadNonCriticalResources();
+    }
+    
+    // Precargar recursos críticos para la siguiente navegación
+    window.addEventListener('load', function() {
+        // Precargar recursos para mejorar navegación
+        var criticalResources = [
+            'wp-content/themes/woodmart/css/parts/base.min72ad.css',
+            'wp-includes/js/jquery/jquery.minf43b.js'
+        ];
+        
+        criticalResources.forEach(function(resource) {
+            var link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = resource;
+            document.head.appendChild(link);
+        });
+    });
+})();
+</script></body>
 </html>
 
 <!-- Page cached by LiteSpeed Cache 7.1 on 2025-07-23 09:58:10 -->
