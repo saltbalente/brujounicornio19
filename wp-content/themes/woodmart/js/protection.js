@@ -87,24 +87,48 @@
         return false;
     });
 
-    // Deshabilitar selección con CSS
-    document.body.style.webkitUserSelect = 'none';
-    document.body.style.mozUserSelect = 'none';
-    document.body.style.msUserSelect = 'none';
-    document.body.style.userSelect = 'none';
+    // Configurar protecciones cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+        // Deshabilitar selección con CSS
+        if (document.body) {
+            document.body.style.webkitUserSelect = 'none';
+            document.body.style.mozUserSelect = 'none';
+            document.body.style.msUserSelect = 'none';
+            document.body.style.userSelect = 'none';
+        }
 
-    // Bloquear imágenes de ser guardadas
-    var images = document.getElementsByTagName('img');
-    for (var i = 0; i < images.length; i++) {
-        images[i].addEventListener('dragstart', function(e) {
-            e.preventDefault();
-            return false;
+        // Bloquear imágenes de ser guardadas
+        var images = document.getElementsByTagName('img');
+        for (var i = 0; i < images.length; i++) {
+            images[i].addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            images[i].style.webkitUserSelect = 'none';
+            images[i].style.mozUserSelect = 'none';
+            images[i].style.msUserSelect = 'none';
+            images[i].style.userSelect = 'none';
+        }
+
+        // Eliminar comentarios del DOM
+        var walker = document.createTreeWalker(
+            document.body,
+            NodeFilter.SHOW_COMMENT,
+            null,
+            false
+        );
+        
+        var commentsToRemove = [];
+        var node;
+        
+        while (node = walker.nextNode()) {
+            commentsToRemove.push(node);
+        }
+        
+        commentsToRemove.forEach(function(comment) {
+            comment.parentNode.removeChild(comment);
         });
-        images[i].style.webkitUserSelect = 'none';
-        images[i].style.mozUserSelect = 'none';
-        images[i].style.msUserSelect = 'none';
-        images[i].style.userSelect = 'none';
-    }
+    });
 
     // Detectar DevTools abierto
     var devtools = {
@@ -148,28 +172,6 @@
         console.profileEnd = function() {};
         console.count = function() {};
     }
-
-    // Ofuscar el código fuente
-    document.addEventListener('DOMContentLoaded', function() {
-        // Eliminar comentarios del DOM
-        var walker = document.createTreeWalker(
-            document.body,
-            NodeFilter.SHOW_COMMENT,
-            null,
-            false
-        );
-        
-        var commentsToRemove = [];
-        var node;
-        
-        while (node = walker.nextNode()) {
-            commentsToRemove.push(node);
-        }
-        
-        commentsToRemove.forEach(function(comment) {
-            comment.parentNode.removeChild(comment);
-        });
-    });
 
     // Bloquear herramientas de inspección
     document.addEventListener('keyup', function(e) {
