@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Script para limpiar el sitio web descargado con HTTrack
-Elimina referencias externas y scripts innecesarios
+Script para limpiar el sitio web estático
+Elimina dependencias externas y optimiza el código
 """
 
 import re
