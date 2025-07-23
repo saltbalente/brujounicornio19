@@ -1367,6 +1367,153 @@ var PremiumFESettings = {"papro_installed":"true"};
 var wpforms_settings = {"val_required":"Este campo es obligatorio.","val_email":"Por favor, introduce una direcci\u00f3n de correo electr\u00f3nico v\u00e1lida.","val_email_suggestion":"\u00bfQuieres decir {suggestion}?","val_email_suggestion_title":"Haz clic para aceptar esta sugerencia.","val_email_restricted":"Esta direcci\u00f3n de correo electr\u00f3nico no est\u00e1 permitida.","val_number":"Por favor, introduce un n\u00famero v\u00e1lido.","val_number_positive":"Por favor, introduce un n\u00famero de tel\u00e9fono v\u00e1lido.","val_confirm":"Los valores del campo no coinciden.","val_checklimit":"Has excedido el n\u00famero de selecciones permitidas: {#}.","val_limit_characters":"{count} de {limit} caracteres m\u00e1ximos.","val_limit_words":"{count} de {limit} palabras m\u00e1ximas.","val_recaptcha_fail_msg":"Ha fallado la verificaci\u00f3n de Google reCAPTCHA, por favor, int\u00e9ntalo de nuevo m\u00e1s tarde.","val_turnstile_fail_msg":"Ha fallado la verificaci\u00f3n de Cloudflare Turnstile, por favor, int\u00e9ntalo de nuevo m\u00e1s tarde.","val_inputmask_incomplete":"Por favor, rellena el campo en el formato requerido.","uuid_cookie":"1","locale":"es","wpforms_plugin_url":"wp-content\/plugins\/wpforms\/","gdpr":"","ajaxurl":"#","mailcheck_enabled":"1","mailcheck_domains":[],"mailcheck_toplevel_domains":["dev"],"is_ssl":"1","page_title":"Inicio","page_id":"13038","currency_code":"USD","currency_thousands":",","currency_decimals":"2","currency_decimal":".","currency_symbol":"$","currency_symbol_pos":"left","val_requiredpayment":"Pago obligatorio.","val_creditcard":"Por favor introduce un n\u00famero de tarjeta de cr\u00e9dito v\u00e1lido.","val_post_max_size":"El tama\u00f1o total de los archivos seleccionados ({totalSize} Mb) supera el l\u00edmite permitido de {maxSize} Mb.","val_time12h":"Por favor introduce el tiempo en formato 12 horas AM\/PM (ej 8:45 AM).","val_time24h":"Por favor introduce el tiempo en formato 24 horas (ej 22:45).","val_time_limit":"Por favor, introduce la hora entre {minTime} y {maxTime}.","val_url":"Por favor, introduce una URL v\u00e1lida.","val_fileextension":"Tipo de archivo no permitido.","val_filesize":"El archivo excede el tama\u00f1o m\u00e1ximo permitido. El archivo no se ha subido.","post_max_size":"1073741824","val_password_strength":"Se requiere una contrase\u00f1a m\u00e1s fuerte. Considera la posibilidad de utilizar letras may\u00fasculas y min\u00fasculas, n\u00fameros y s\u00edmbolos.","val_phone":"Por favor, escribe un n\u00famero de tel\u00e9fono v\u00e1lido.","richtext_add_media_button":"","entry_preview_iframe_styles":["wp-includes\/js\/tinymce\/skins\/lightgray\/content.min.css?ver=6.8.2","wp-includes\/css\/dashicons.min.css?ver=6.8.2","wp-includes\/js\/tinymce\/skins\/wordpress\/wp-content.css?ver=6.8.2","wp-content\/plugins\/wpforms\/assets\/pro\/css\/fields\/richtext\/editor-content.min.css"]}
 /* ]]> */
 </script>
+<script type="text/javascript">
+// Custom Slider Implementation to replace missing Elementor carousel functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Find the image carousel element
+    const carouselElement = document.querySelector('.elementor-widget-image-carousel');
+    if (!carouselElement) return;
+
+    const wrapper = carouselElement.querySelector('.elementor-image-carousel');
+    const slides = wrapper.querySelectorAll('.swiper-slide');
+    const prevButton = carouselElement.querySelector('.elementor-swiper-button-prev');
+    const nextButton = carouselElement.querySelector('.elementor-swiper-button-next');
+    
+    if (slides.length === 0) return;
+
+    let currentIndex = 0;
+    let autoplayInterval;
+    const autoplaySpeed = 3000; // 3 seconds
+    const slidesToShow = window.innerWidth <= 767 ? 1 : 4; // Mobile: 1, Desktop: 4
+    
+    // Initialize slider
+    function initSlider() {
+        // Set initial positions
+        updateSliderPosition();
+        
+        // Start autoplay
+        startAutoplay();
+        
+        // Add event listeners
+        if (prevButton) {
+            prevButton.addEventListener('click', goToPrevSlide);
+        }
+        
+        if (nextButton) {
+            nextButton.addEventListener('click', goToNextSlide);
+        }
+        
+        // Pause on hover
+        carouselElement.addEventListener('mouseenter', stopAutoplay);
+        carouselElement.addEventListener('mouseleave', startAutoplay);
+        
+        // Handle window resize
+        window.addEventListener('resize', handleResize);
+    }
+    
+    function updateSliderPosition() {
+        const slideWidth = 100 / slidesToShow;
+        const translateX = -(currentIndex * slideWidth);
+        
+        // Apply transform to wrapper
+        wrapper.style.transform = `translateX(${translateX}%)`;
+        wrapper.style.transition = 'transform 0.5s ease';
+        
+        // Update slide widths
+        slides.forEach(slide => {
+            slide.style.width = `${slideWidth}%`;
+            slide.style.flexShrink = '0';
+        });
+    }
+    
+    function goToNextSlide() {
+        const maxIndex = Math.max(0, slides.length - slidesToShow);
+        currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+        updateSliderPosition();
+    }
+    
+    function goToPrevSlide() {
+        const maxIndex = Math.max(0, slides.length - slidesToShow);
+        currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
+        updateSliderPosition();
+    }
+    
+    function startAutoplay() {
+        stopAutoplay(); // Clear any existing interval
+        autoplayInterval = setInterval(goToNextSlide, autoplaySpeed);
+    }
+    
+    function stopAutoplay() {
+        if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+            autoplayInterval = null;
+        }
+    }
+    
+    function handleResize() {
+        const newSlidesToShow = window.innerWidth <= 767 ? 1 : 4;
+        if (newSlidesToShow !== slidesToShow) {
+            // Recalculate and update
+            location.reload(); // Simple solution for responsive changes
+        }
+    }
+    
+    // Initialize the slider
+    initSlider();
+    
+    // Add some basic styling to ensure proper display
+    const style = document.createElement('style');
+    style.textContent = `
+        .elementor-image-carousel-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .elementor-image-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .elementor-image-carousel .swiper-slide {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .elementor-swiper-button {
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+        
+        .elementor-swiper-button:hover {
+            opacity: 1;
+        }
+        
+        .elementor-swiper-button-prev::before {
+            content: '❮';
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
+        }
+        
+        .elementor-swiper-button-next::before {
+            content: '❯';
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
+        }
+        
+        @media (max-width: 767px) {
+            .elementor-image-carousel .swiper-slide {
+                width: 100% !important;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
 </body>
 </html>
 

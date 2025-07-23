@@ -75,11 +75,17 @@
         }
     });
 
-    // Bloquear selección de texto
-    document.addEventListener('selectstart', function(e) {
-        e.preventDefault();
-        return false;
-    });
+    // Bloquear selección de texto (solo en desktop)
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        document.addEventListener('selectstart', function(e) {
+            // Permitir selección en campos de formulario
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return true;
+            }
+            e.preventDefault();
+            return false;
+        });
+    }
 
     // Bloquear arrastrar elementos
     document.addEventListener('dragstart', function(e) {
@@ -89,25 +95,27 @@
 
     // Configurar protecciones cuando el DOM esté listo
     document.addEventListener('DOMContentLoaded', function() {
-        // Deshabilitar selección con CSS
-        if (document.body) {
+        // Deshabilitar selección con CSS (solo en desktop)
+        if (document.body && !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             document.body.style.webkitUserSelect = 'none';
             document.body.style.mozUserSelect = 'none';
             document.body.style.msUserSelect = 'none';
             document.body.style.userSelect = 'none';
         }
 
-        // Bloquear imágenes de ser guardadas
-        var images = document.getElementsByTagName('img');
-        for (var i = 0; i < images.length; i++) {
-            images[i].addEventListener('dragstart', function(e) {
-                e.preventDefault();
-                return false;
-            });
-            images[i].style.webkitUserSelect = 'none';
-            images[i].style.mozUserSelect = 'none';
-            images[i].style.msUserSelect = 'none';
-            images[i].style.userSelect = 'none';
+        // Bloquear imágenes de ser guardadas (solo en desktop)
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            var images = document.getElementsByTagName('img');
+            for (var i = 0; i < images.length; i++) {
+                images[i].addEventListener('dragstart', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+                images[i].style.webkitUserSelect = 'none';
+                images[i].style.mozUserSelect = 'none';
+                images[i].style.msUserSelect = 'none';
+                images[i].style.userSelect = 'none';
+            }
         }
 
         // Eliminar comentarios del DOM
@@ -130,7 +138,7 @@
         });
     });
 
-    // Detectar DevTools abierto
+    // Detectar DevTools abierto (solo en desktop)
     var devtools = {
         open: false,
         orientation: null
@@ -138,18 +146,31 @@
 
     var threshold = 160;
 
-    setInterval(function() {
-        if (window.outerHeight - window.innerHeight > threshold || 
-            window.outerWidth - window.innerWidth > threshold) {
-            if (!devtools.open) {
-                devtools.open = true;
-                // Redirigir o mostrar mensaje
-                document.body.innerHTML = '<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;z-index:999999;">Acceso no autorizado detectado</div>';
+    // Solo aplicar detección de DevTools en dispositivos de escritorio
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        setInterval(function() {
+            // Solo activar si la diferencia es muy grande (más de 300px)
+            if ((window.outerHeight - window.innerHeight > 300 || 
+                window.outerWidth - window.innerWidth > 300) && 
+                window.innerWidth > 1024) { // Solo en pantallas grandes
+                if (!devtools.open) {
+                    devtools.open = true;
+                    // Mostrar advertencia menos agresiva
+                    var warning = document.createElement('div');
+                    warning.style.cssText = 'position:fixed;top:20px;right:20px;background:rgba(255,0,0,0.9);color:#fff;padding:15px;border-radius:5px;z-index:999999;font-size:14px;max-width:300px;';
+                    warning.innerHTML = '⚠️ Herramientas de desarrollador detectadas';
+                    document.body.appendChild(warning);
+                    
+                    setTimeout(function() {
+                        if (warning.parentNode) {
+                            warning.parentNode.removeChild(warning);
+                        }
+                        devtools.open = false;
+                    }, 3000);
+                }
             }
-        } else {
-            devtools.open = false;
-        }
-    }, 500);
+        }, 1000); // Reducir frecuencia de verificación
+    }
 
     // Bloquear console.log y otras funciones de consola
     if (typeof console !== 'undefined') {
