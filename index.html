@@ -1512,6 +1512,275 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 });
+
+// Popup promocional que aparece a los 5 segundos
+setTimeout(function() {
+    showPromoPopup();
+}, 5000);
+
+function showPromoPopup() {
+    // Crear el popup
+    const popup = document.createElement('div');
+    popup.id = 'promo-popup';
+    popup.innerHTML = `
+        <div class="popup-overlay">
+            <div class="popup-content">
+                <button class="popup-close" onclick="closePromoPopup()">&times;</button>
+                <div class="popup-header">
+                    <img src="wp-content/uploads/2025/05/assets_task_01jwcapzs4fd8v1hsfkw715qfz_1748465646_img_3.webp" alt="Maestro Gregorio" class="maestro-image">
+                    <div class="popup-title">
+                        <h2>🔮 OFERTA ESPECIAL 🔮</h2>
+                        <h3>¡SOLO POR HOY!</h3>
+                    </div>
+                </div>
+                <div class="popup-body">
+                    <div class="offer-text">
+                        <h4>✨ LIMPIA ESPIRITUAL GRATIS ✨</h4>
+                        <h4>📞 CONSULTA GRATUITA 📞</h4>
+                        <p>Descubre qué energías negativas te están afectando</p>
+                        <p><strong>Maestro Gregorio</strong> - Brujo Mayor de Catemaco</p>
+                        <p class="urgency">⏰ Esta oferta es limitada</p>
+                    </div>
+                    <div class="whatsapp-section">
+                        <img src="wp-content/uploads/2024/02/Whatsapp.png" alt="WhatsApp" class="whatsapp-image">
+                        <a href="https://wa.me/5212941168788?text=Hola%20Maestro%20Gregorio,%20quiero%20mi%20limpia%20espiritual%20y%20consulta%20GRATIS" class="whatsapp-button" target="_blank">
+                            💬 CONTACTAR AHORA GRATIS
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Agregar estilos
+    const style = document.createElement('style');
+    style.textContent = `
+        #promo-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .popup-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .popup-content {
+            background: linear-gradient(135deg, #6B0000 0%, #8B0000 50%, #6B0000 100%);
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 3px solid #FFD700;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 30px;
+            color: #FFD700;
+            cursor: pointer;
+            z-index: 1;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .popup-close:hover {
+            color: #FFF;
+        }
+        
+        .popup-header {
+            text-align: center;
+            padding: 20px 20px 10px;
+            position: relative;
+        }
+        
+        .maestro-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #FFD700;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+        
+        .popup-title h2 {
+            color: #FFD700;
+            font-size: 24px;
+            margin: 0 0 5px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+        }
+        
+        .popup-title h3 {
+            color: #FFF;
+            font-size: 18px;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .popup-body {
+            padding: 0 20px 20px;
+            text-align: center;
+        }
+        
+        .offer-text h4 {
+            color: #FFD700;
+            font-size: 20px;
+            margin: 15px 0 5px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+        }
+        
+        .offer-text p {
+            color: #FFF;
+            margin: 8px 0;
+            font-size: 16px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .offer-text p strong {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        
+        .urgency {
+            color: #FF6B6B !important;
+            font-weight: bold !important;
+            font-size: 14px !important;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-section {
+            margin-top: 20px;
+        }
+        
+        .whatsapp-image {
+            width: 60px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        
+        .whatsapp-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .whatsapp-button:hover {
+            background: linear-gradient(45deg, #128C7E, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+            color: white;
+            text-decoration: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { 
+                transform: scale(0.7) translateY(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @media (max-width: 600px) {
+            .popup-content {
+                margin: 10px;
+                max-width: none;
+            }
+            
+            .popup-title h2 {
+                font-size: 20px;
+            }
+            
+            .popup-title h3 {
+                font-size: 16px;
+            }
+            
+            .offer-text h4 {
+                font-size: 18px;
+            }
+            
+            .offer-text p {
+                font-size: 14px;
+            }
+            
+            .whatsapp-button {
+                font-size: 14px;
+                padding: 12px 20px;
+            }
+        }
+    `;
+    
+    document.head.appendChild(style);
+    document.body.appendChild(popup);
+}
+
+function closePromoPopup() {
+    const popup = document.getElementById('promo-popup');
+    if (popup) {
+        popup.style.animation = 'fadeOut 0.3s ease-in-out';
+        setTimeout(() => {
+            popup.remove();
+        }, 300);
+    }
+}
+
+// Agregar animación de fadeOut
+const fadeOutStyle = document.createElement('style');
+fadeOutStyle.textContent = `
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+`;
+document.head.appendChild(fadeOutStyle);
+
+// Cerrar popup al hacer clic fuera del contenido
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('popup-overlay')) {
+        closePromoPopup();
+    }
+});
 </script>
 </body>
 </html>
