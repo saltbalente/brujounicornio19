@@ -15,7 +15,7 @@ def replace_whatsapp_links(file_path):
         content = f.read()
     
     # Número de Estados Unidos y mensaje personalizado
-    us_number = "13853137278"
+    us_number = "+17864621385"
     message = "Quiero una consulta con el Unicornio Negro"
     
     # URL codificada para WhatsApp
